@@ -420,4 +420,4 @@ script = ExtResource("1_tl3rx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_yikw8")
-animation = &"front_attack"
+animation = &"back_attack"
