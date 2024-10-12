@@ -417,15 +417,16 @@ animations = [{
 radius = 4.0
 
 [node name="player" type="CharacterBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_tl3rx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 15)
+scale = Vector2(0.965, 1)
 sprite_frames = SubResource("SpriteFrames_yikw8")
 animation = &"side_walk"
 offset = Vector2(0, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-y_sort_enabled = true
 position = Vector2(0, 14)
 shape = SubResource("CircleShape2D_xyr08")
