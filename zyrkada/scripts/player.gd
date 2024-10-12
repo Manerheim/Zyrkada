@@ -2,13 +2,17 @@ extends CharacterBody2D
 
 const speed = 100
 var current_dir = "none"
-
+var enemy_in_attack_range = false
+var attack_cooldown = true
+var player_health = 100
+var player_alive = true
 
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
 
 func _physics_process(delta):
 	player_movement(delta)
+	enemy_attack()
 	
 func player_movement(delta):
 	
@@ -71,3 +75,22 @@ func play_animation(movement):
 			animation.play("back_walk")
 		elif movement == 0:
 			animation.play("back_idle")
+
+
+func player():
+	pass
+
+func _on_player_hitbox_body_entered(body: Node2D) -> void:
+	if body.has_method("enemy"):
+		enemy_in_attack_range = true
+	
+
+
+func _on_player_hitbox_body_exited(body: Node2D) -> void:
+	if body.has_method("enemy"):
+		enemy_in_attack_range = false
+
+func enemy_attack():
+	if enemy_in_attack_range == true:
+		print("player took dmg")
+	
