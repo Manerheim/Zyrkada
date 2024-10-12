@@ -171,4 +171,5 @@ tile_map_data = PackedByteArray("AAAHAPz/AwAAAAUAAAD///r/AwAAAAUAAAABAPz/AwAFAAA
 tile_set = SubResource("TileSet_mw4o5")
 
 [node name="player" parent="." instance=ExtResource("4_gjqdi")]
+y_sort_enabled = true
 position = Vector2(107.573, 103.125)
