@@ -1,7 +1,7 @@
 [gd_scene load_steps=44 format=3 uid="uid://bn43u5kpmbs"]
 
 [ext_resource type="Texture2D" uid="uid://uvcgtoqu8drg" path="res://art/sprites/characters/slime.png" id="1_8did5"]
-[ext_resource type="Script" path="res://scenes/slime.gd" id="1_a2tlo"]
+[ext_resource type="Script" path="res://scripts/slime.gd" id="1_a2tlo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uk1b1"]
 atlas = ExtResource("1_8did5")
@@ -333,5 +333,11 @@ shape = SubResource("CircleShape2D_d2lye")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_hitbox"]
 shape = SubResource("CircleShape2D_343hu")
 
+[node name="take_damage_cooldown" type="Timer" parent="."]
+wait_time = 0.3
+
 [connection signal="body_entered" from="detectian_area" to="." method="_on_detectian_area_body_entered"]
 [connection signal="body_exited" from="detectian_area" to="." method="_on_detectian_area_body_exited"]
+[connection signal="body_entered" from="Enemy_hitbox" to="." method="_on_enemy_hitbox_body_entered"]
+[connection signal="body_exited" from="Enemy_hitbox" to="." method="_on_enemy_hitbox_body_exited"]
+[connection signal="timeout" from="take_damage_cooldown" to="." method="_on_take_damage_cooldown_timeout"]
