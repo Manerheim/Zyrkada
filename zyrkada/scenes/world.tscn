@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=4 uid="uid://bk1yq0muw2mtl"]
+[gd_scene load_steps=14 format=4 uid="uid://bk1yq0muw2mtl"]
 
 [ext_resource type="Texture2D" uid="uid://ds1dws3ogwhi3" path="res://art/sprites/tilesets/plains.png" id="1_6p24i"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_rt5q0"]
 [ext_resource type="Texture2D" uid="uid://cj52p8438ncaf" path="res://art/sprites/tilesets/grass.png" id="2_0g8nu"]
 [ext_resource type="Texture2D" uid="uid://dd4j3sxlevna3" path="res://art/sprites/tilesets/decor_16x16.png" id="2_t4ntb"]
 [ext_resource type="Texture2D" uid="uid://pxuc7krcfn5c" path="res://art/sprites/objects/objects.png" id="3_molss"]
@@ -159,10 +160,14 @@ sources/1 = SubResource("TileSetAtlasSource_d5dwj")
 sources/2 = SubResource("TileSetAtlasSource_g7eq3")
 sources/3 = SubResource("TileSetAtlasSource_su81y")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gcejb"]
+size = Vector2(23.9446, 16.1875)
+
 [node name="world" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(-1, 2)
 scale = Vector2(1.00397, 0.969697)
+script = ExtResource("1_rt5q0")
 
 [node name="Trees" type="TileMapLayer" parent="."]
 y_sort_enabled = true
@@ -173,7 +178,22 @@ tile_set = SubResource("TileSet_mw4o5")
 
 [node name="player" parent="." instance=ExtResource("4_gjqdi")]
 y_sort_enabled = true
-position = Vector2(107.573, 103.125)
+position = Vector2(71.7153, 88.6875)
 
 [node name="slime" parent="." instance=ExtResource("6_koc6i")]
-position = Vector2(270.924, 150.563)
+y_sort_enabled = true
+position = Vector2(200.205, 124.781)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(2.98814, -3.09375, 129.486, -2.0625, 129.486, -18.5625, 152.395, -18.5625, 152.395, -2.0625, 381.486, -2.0625, 381.486, 258.844, 3.98418, 257.813, 5.97627, -22.6875, -16.9328, -21.6563, -13.9446, 277.406, 413.359, 277.406, 411.367, -40.2188, 65.739, -41.25, 5.97627, -16.5)
+
+[node name="cliffside_transition_point" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cliffside_transition_point"]
+position = Vector2(140.423, -10.1563)
+shape = SubResource("RectangleShape2D_gcejb")
+
+[connection signal="body_entered" from="cliffside_transition_point" to="." method="_on_cliffside_transition_point_body_entered"]
+[connection signal="body_exited" from="cliffside_transition_point" to="." method="_on_cliffside_transition_point_body_exited"]
